@@ -1,0 +1,28 @@
+version: '3.8'
+
+volumes:
+  db-data: {}
+
+services:
+  db:
+    build:
+      context: ./backend
+      dockerfile: ./docker/postgres/Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: ./backend
+      dockerfile: ./docker/django/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    command: ./docker/django/entrypoint.sh

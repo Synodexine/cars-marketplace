@@ -1,0 +1,6 @@
+Django~=4.2
+psycopg2~=2.9
+
+gunicorn~=21.2
+requests~=2.31
+djangorestframework~=3.14
