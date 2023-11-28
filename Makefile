@@ -11,4 +11,4 @@ test:
 	docker-compose exec app python manage.py test
 
 run:
-	docker-compose exec app python manage.py $(c)
+	docker-compose exec app python manage.py $(command)
