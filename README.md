@@ -1,4 +1,4 @@
-# PGSM WMS
+# Cars marketplace
 
 ## Before run
 Prepare environment variables:
