@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+import rest_framework.authentication
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -37,7 +39,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'config.urls'
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': ['rest_framework.authentication.TokenAuthentication']
 }
 
 TEMPLATES = [

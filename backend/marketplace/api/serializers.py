@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from drf_extra_fields.fields import DateRangeField
@@ -124,6 +125,81 @@ class GenerationDetailSerializer(GenerationSerializer):
         if allowed_parameters:
             instance.allowed_parameters.set(allowed_parameters)
             instance.save()
-        return super().update(instance, validated_data)
+        return super(GenerationDetailSerializer, self).update(instance, validated_data)
 
 
+class AdvertisementOwnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'email',
+            'first_name',
+            'last_name'
+        ]
+
+
+class AdvertisementListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Advertisement
+        fields = [
+            'id',
+            'name',
+            'description',
+            'price',
+            'mileage',
+            'generation_id'
+        ]
+
+
+class AdvertisementSearchSerializer(serializers.Serializer):
+    brand = serializers.IntegerField(min_value=1, required=True)
+    car_model = serializers.IntegerField(min_value=1, required=False)
+    generation = serializers.IntegerField(min_value=1, required=False)
+    year = serializers.IntegerField(min_value=1970, required=False)
+    price_from = serializers.FloatField(min_value=0, required=False)
+    price_to = serializers.FloatField(min_value=0, required=False)
+    parameters = serializers.ListField(child=serializers.IntegerField(min_value=1), required=False)
+
+
+class AdvertisementDetailSerializer(serializers.ModelSerializer):
+    owner = AdvertisementOwnerSerializer()
+
+    class Meta:
+        model = Advertisement
+        fields = [
+            'id',
+            'name',
+            'description',
+            'price',
+            'mileage',
+            'generation',
+            'parameters',
+            'owner',
+            'is_approved'
+        ]
+        depth = 3
+
+
+class AdvertisementCreateSerializer(AdvertisementListSerializer):
+    class Meta:
+        model = Advertisement
+        fields = [
+            'id',
+            'description',
+            'price',
+            'generation',
+            'parameters',
+            'owner',
+            'is_approved'
+        ]
+        read_only_fields = ['is_approved']
+
+    def create(self, validated_data):
+        # this code allows to add only parameters that are exist in a generation
+        parameters_ids = [parameter.id for parameter in validated_data.pop('parameters')]
+        advertisement = super(AdvertisementCreateSerializer, self).create(validated_data)
+        parameters = advertisement.generation.allowed_parameters.filter(id__in=parameters_ids)
+        advertisement.parameters.set(parameters)
+        advertisement.save()
+        return advertisement
