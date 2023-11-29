@@ -1,0 +1,1219 @@
+swagger: '2.0'
+info:
+  title: Cars marketplace
+  version: 1.0.0
+basePath: /api
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  Token:
+    name: Authorization
+    in: header
+    type: apiKey
+security:
+- Token: []
+paths:
+  /advertisements/:
+    get:
+      operationId: advertisements_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AdvertisementList'
+      tags:
+      - Advertisements
+    parameters: []
+  /advertisements/create/:
+    post:
+      operationId: advertisements_create_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/AdvertisementCreate'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/AdvertisementCreate'
+      tags:
+      - Advertisements
+    parameters: []
+  /advertisements/{id}/:
+    get:
+      operationId: advertisements_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/AdvertisementDetail'
+      tags:
+      - Advertisements
+    delete:
+      operationId: advertisements_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Advertisements
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this advertisement.
+      required: true
+      type: integer
+  /advertisements/{id}/approve/:
+    post:
+      operationId: advertisements_approve_create
+      description: ''
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Advertisements
+    parameters:
+    - name: id
+      in: path
+      required: true
+      type: string
+  /brands/:
+    get:
+      operationId: brands_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Brand'
+      tags:
+      - Brands
+    post:
+      operationId: brands_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Brand'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Brand'
+      tags:
+      - Brands
+    parameters: []
+  /brands/{id}/:
+    get:
+      operationId: brands_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Brand'
+      tags:
+      - Brands
+    put:
+      operationId: brands_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Brand'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Brand'
+      tags:
+      - Brands
+    patch:
+      operationId: brands_partial_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Brand'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Brand'
+      tags:
+      - Brands
+    delete:
+      operationId: brands_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Brands
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this brand.
+      required: true
+      type: integer
+  /generations/:
+    get:
+      operationId: generations_list
+      description: ''
+      parameters:
+      - name: car_model_id
+        in: query
+        description: car_model_id
+        required: false
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Generation'
+      tags:
+      - Generations
+    post:
+      operationId: generations_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Generation'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Generation'
+      tags:
+      - Generations
+    parameters: []
+  /generations/{id}/:
+    get:
+      operationId: generations_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GenerationDetail'
+      tags:
+      - Generations
+    put:
+      operationId: generations_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GenerationDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GenerationDetail'
+      tags:
+      - Generations
+    patch:
+      operationId: generations_partial_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/GenerationDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GenerationDetail'
+      tags:
+      - Generations
+    delete:
+      operationId: generations_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Generations
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this generation.
+      required: true
+      type: integer
+  /models/:
+    get:
+      operationId: models_list
+      description: ''
+      parameters:
+      - name: brand_id
+        in: query
+        description: brand_id
+        required: false
+        type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CarModel'
+      tags:
+      - Models
+    post:
+      operationId: models_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CarModel'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/CarModel'
+      tags:
+      - Models
+    parameters: []
+  /models/{id}/:
+    get:
+      operationId: models_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CarModelDetail'
+      tags:
+      - Models
+    put:
+      operationId: models_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CarModelDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CarModelDetail'
+      tags:
+      - Models
+    patch:
+      operationId: models_partial_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/CarModelDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CarModelDetail'
+      tags:
+      - Models
+    delete:
+      operationId: models_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - Models
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this car model.
+      required: true
+      type: integer
+  /obtain-token/:
+    post:
+      operationId: obtain-token_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/AuthTokenObtain'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/AuthToken'
+      tags:
+      - User
+    parameters: []
+  /parameter-types/:
+    get:
+      operationId: parameter-types_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ParameterType'
+      tags:
+      - parameter-types
+    post:
+      operationId: parameter-types_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ParameterType'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParameterType'
+      tags:
+      - parameter-types
+    parameters: []
+  /parameter-types/{id}/:
+    get:
+      operationId: parameter-types_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParameterTypeDetail'
+      tags:
+      - parameter-types
+    put:
+      operationId: parameter-types_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ParameterTypeDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParameterTypeDetail'
+      tags:
+      - parameter-types
+    patch:
+      operationId: parameter-types_partial_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ParameterTypeDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParameterTypeDetail'
+      tags:
+      - parameter-types
+    delete:
+      operationId: parameter-types_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - parameter-types
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this parameter type.
+      required: true
+      type: integer
+  /parameters/:
+    get:
+      operationId: parameters_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Parameter'
+      tags:
+      - parameters
+    post:
+      operationId: parameters_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Parameter'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Parameter'
+      tags:
+      - parameters
+    parameters: []
+  /parameters/{id}/:
+    get:
+      operationId: parameters_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParameterDetail'
+      tags:
+      - parameters
+    put:
+      operationId: parameters_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ParameterDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParameterDetail'
+      tags:
+      - parameters
+    patch:
+      operationId: parameters_partial_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/ParameterDetail'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ParameterDetail'
+      tags:
+      - parameters
+    delete:
+      operationId: parameters_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - parameters
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this parameter.
+      required: true
+      type: integer
+  /register/:
+    post:
+      operationId: register_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Registration'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Registration'
+      tags:
+      - User
+    parameters: []
+definitions:
+  AdvertisementList:
+    required:
+    - description
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        readOnly: true
+      description:
+        title: Description
+        type: string
+        maxLength: 512
+        minLength: 1
+      price:
+        title: Price
+        type: number
+      mileage:
+        title: Mileage
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      generation_id:
+        title: Generation id
+        type: string
+        readOnly: true
+  AdvertisementCreate:
+    required:
+    - description
+    - generation
+    - parameters
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      description:
+        title: Description
+        type: string
+        maxLength: 512
+        minLength: 1
+      price:
+        title: Price
+        type: number
+      generation:
+        title: Generation
+        type: integer
+      parameters:
+        type: array
+        items:
+          type: integer
+        uniqueItems: true
+      is_approved:
+        title: Is approved
+        type: boolean
+        readOnly: true
+  AdvertisementOwner:
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      email:
+        title: Email address
+        type: string
+        format: email
+        maxLength: 254
+      first_name:
+        title: First name
+        type: string
+        maxLength: 150
+      last_name:
+        title: Last name
+        type: string
+        maxLength: 150
+  AdvertisementDetail:
+    required:
+    - description
+    - owner
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        readOnly: true
+      description:
+        title: Description
+        type: string
+        maxLength: 512
+        minLength: 1
+      price:
+        title: Price
+        type: number
+      mileage:
+        title: Mileage
+        type: integer
+        maximum: 2147483647
+        minimum: -2147483648
+      generation:
+        required:
+        - name
+        - year
+        type: object
+        properties:
+          id:
+            title: ID
+            type: integer
+            readOnly: true
+          name:
+            title: Name
+            type: string
+            maxLength: 256
+            minLength: 1
+          year:
+            title: Year
+            type: object
+            properties:
+              lower:
+                type: string
+                format: date
+              upper:
+                type: string
+                format: date
+          car_model:
+            required:
+            - name
+            type: object
+            properties:
+              id:
+                title: ID
+                type: integer
+                readOnly: true
+              name:
+                title: Name
+                type: string
+                maxLength: 256
+                minLength: 1
+              brand:
+                required:
+                - name
+                type: object
+                properties:
+                  id:
+                    title: ID
+                    type: integer
+                    readOnly: true
+                  name:
+                    title: Name
+                    type: string
+                    maxLength: 256
+                    minLength: 1
+                readOnly: true
+            readOnly: true
+          allowed_parameters:
+            type: array
+            items:
+              required:
+              - name
+              type: object
+              properties:
+                id:
+                  title: ID
+                  type: integer
+                  readOnly: true
+                name:
+                  title: Name
+                  type: string
+                  maxLength: 256
+                  minLength: 1
+                type:
+                  required:
+                  - name
+                  type: object
+                  properties:
+                    id:
+                      title: ID
+                      type: integer
+                      readOnly: true
+                    name:
+                      title: Name
+                      type: string
+                      maxLength: 256
+                      minLength: 1
+                  readOnly: true
+            readOnly: true
+        readOnly: true
+      parameters:
+        type: array
+        items:
+          required:
+          - name
+          type: object
+          properties:
+            id:
+              title: ID
+              type: integer
+              readOnly: true
+            name:
+              title: Name
+              type: string
+              maxLength: 256
+              minLength: 1
+            type:
+              required:
+              - name
+              type: object
+              properties:
+                id:
+                  title: ID
+                  type: integer
+                  readOnly: true
+                name:
+                  title: Name
+                  type: string
+                  maxLength: 256
+                  minLength: 1
+              readOnly: true
+        readOnly: true
+      owner:
+        $ref: '#/definitions/AdvertisementOwner'
+      is_approved:
+        title: Is approved
+        type: boolean
+  Brand:
+    required:
+    - name
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+  Generation:
+    required:
+    - name
+    - car_model_id
+    - year
+    - allowed_parameters
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+      car_model_id:
+        title: Car model id
+        type: integer
+        minimum: 1
+      year:
+        title: Year
+        type: object
+        properties:
+          lower:
+            type: string
+            format: date
+          upper:
+            type: string
+            format: date
+      allowed_parameters:
+        type: array
+        items:
+          type: integer
+        uniqueItems: true
+  GenerationDetail:
+    required:
+    - name
+    - car_model_id
+    - year
+    - allowed_parameters_ids
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+      car_model:
+        required:
+        - name
+        type: object
+        properties:
+          id:
+            title: ID
+            type: integer
+            readOnly: true
+          name:
+            title: Name
+            type: string
+            maxLength: 256
+            minLength: 1
+          brand:
+            required:
+            - name
+            type: object
+            properties:
+              id:
+                title: ID
+                type: integer
+                readOnly: true
+              name:
+                title: Name
+                type: string
+                maxLength: 256
+                minLength: 1
+            readOnly: true
+        readOnly: true
+      car_model_id:
+        title: Car model id
+        type: integer
+        minimum: 1
+      year:
+        title: Year
+        type: object
+        properties:
+          lower:
+            type: string
+            format: date
+          upper:
+            type: string
+            format: date
+      allowed_parameters:
+        type: array
+        items:
+          required:
+          - name
+          type: object
+          properties:
+            id:
+              title: ID
+              type: integer
+              readOnly: true
+            name:
+              title: Name
+              type: string
+              maxLength: 256
+              minLength: 1
+            type:
+              required:
+              - name
+              type: object
+              properties:
+                id:
+                  title: ID
+                  type: integer
+                  readOnly: true
+                name:
+                  title: Name
+                  type: string
+                  maxLength: 256
+                  minLength: 1
+              readOnly: true
+        readOnly: true
+      allowed_parameters_ids:
+        type: array
+        items:
+          type: integer
+          minimum: 1
+  CarModel:
+    required:
+    - name
+    - brand_id
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+      brand_id:
+        title: Brand id
+        type: integer
+        minimum: 1
+  CarModelDetail:
+    required:
+    - name
+    - brand_id
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+      brand:
+        required:
+        - name
+        type: object
+        properties:
+          id:
+            title: ID
+            type: integer
+            readOnly: true
+          name:
+            title: Name
+            type: string
+            maxLength: 256
+            minLength: 1
+        readOnly: true
+      generations:
+        type: array
+        items:
+          required:
+          - name
+          - year
+          - car_model
+          - allowed_parameters
+          type: object
+          properties:
+            id:
+              title: ID
+              type: integer
+              readOnly: true
+            name:
+              title: Name
+              type: string
+              maxLength: 256
+              minLength: 1
+            year:
+              title: Year
+              type: object
+              properties:
+                lower:
+                  type: string
+                  format: date
+                upper:
+                  type: string
+                  format: date
+            car_model:
+              title: Car model
+              type: integer
+            allowed_parameters:
+              type: array
+              items:
+                type: integer
+              uniqueItems: true
+        readOnly: true
+      brand_id:
+        title: Brand id
+        type: integer
+        minimum: 1
+  AuthTokenObtain:
+    required:
+    - username
+    - password
+    type: object
+    properties:
+      username:
+        title: Username
+        type: string
+        minLength: 1
+      password:
+        title: Password
+        type: string
+        minLength: 1
+  AuthToken:
+    type: object
+    properties:
+      token:
+        title: Token
+        type: string
+        readOnly: true
+        minLength: 1
+  ParameterType:
+    required:
+    - name
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+  ParameterTypeDetail:
+    required:
+    - name
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+      parameters:
+        type: array
+        items:
+          required:
+          - name
+          - type
+          type: object
+          properties:
+            id:
+              title: ID
+              type: integer
+              readOnly: true
+            name:
+              title: Name
+              type: string
+              maxLength: 256
+              minLength: 1
+            type:
+              title: Type
+              type: integer
+        readOnly: true
+  Parameter:
+    required:
+    - name
+    - type_id
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+      type_id:
+        title: Type id
+        type: integer
+        minimum: 1
+  ParameterDetail:
+    required:
+    - name
+    - type_id
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      name:
+        title: Name
+        type: string
+        maxLength: 256
+        minLength: 1
+      type_id:
+        title: Type id
+        type: integer
+        minimum: 1
+      type:
+        required:
+        - name
+        type: object
+        properties:
+          id:
+            title: ID
+            type: integer
+            readOnly: true
+          name:
+            title: Name
+            type: string
+            maxLength: 256
+            minLength: 1
+        readOnly: true
+  Registration:
+    required:
+    - username
+    - password
+    - email
+    - first_name
+    - last_name
+    type: object
+    properties:
+      username:
+        title: username
+        type: string
+        minLength: 1
+      password:
+        title: Password
+        description: Required. 20 characters or fewer. Letters, digits and @/./+/-/_
+          only.
+        type: string
+        pattern: ^[\w.@+-]+$
+        maxLength: 150
+        minLength: 1
+      email:
+        title: Email
+        type: string
+        format: email
+        minLength: 1
+      first_name:
+        title: First name
+        type: string
+        maxLength: 150
+      last_name:
+        title: Last name
+        type: string
+        maxLength: 150

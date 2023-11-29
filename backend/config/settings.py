@@ -1,13 +1,12 @@
 import os
 from pathlib import Path
 
-import rest_framework.authentication
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = os.environ.get('DEBUG').lower() in ('on', 'true', 'y', 'yes')
+DEBUG = os.environ.get('DEBUG', '').lower() in ('on', 'true', 'y', 'yes')
 
 ALLOWED_HOSTS = []
 
