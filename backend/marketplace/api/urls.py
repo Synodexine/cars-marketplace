@@ -4,7 +4,8 @@ from rest_framework.routers import DefaultRouter
 from marketplace.api.views import (BrandViewSet, CarModelListCreateView, CarModelRetrieveUpdateDestroyView,
                                    GenerationRetrieveUpdateDestroyView, GenerationListCreateView,
                                    ParameterTypeListCreateView, ParameterTypeRetrieveUpdateDestroyView,
-                                   ParameterListCreateView, ParameterRetrieveUpdateDestroyView)
+                                   ParameterListCreateView, ParameterRetrieveUpdateDestroyView, ApproveAdvertisement,
+                                   AdvertisementCreateView, AdvertisementListView, AdvertisementRetrieveDestroyView)
 
 
 router = DefaultRouter()
@@ -19,5 +20,9 @@ urlpatterns = [
     path('parameter-types/<int:pk>/', ParameterTypeRetrieveUpdateDestroyView.as_view()),
     path('parameters/', ParameterListCreateView.as_view()),
     path('parameters/<int:pk>/', ParameterRetrieveUpdateDestroyView.as_view()),
+    path('advertisements/create/', AdvertisementCreateView.as_view()),
+    path('advertisements/', AdvertisementListView.as_view()),
+    path('advertisements/<int:pk>/', AdvertisementRetrieveDestroyView.as_view()),
+    path('advertisements/<int:pk>/approve/', ApproveAdvertisement.as_view()),
 ] + router.urls
 
