@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from marketplace.models import Brand, CarModel, Generation, ParameterType, Parameter, Advertisement
+from marketplace.models import (
+    Brand,
+    CarModel,
+    Generation,
+    ParameterType,
+    Parameter,
+    Advertisement,
+)
 
 
 @admin.register(Brand)
