@@ -25,4 +25,4 @@ $ make run command = [your_command]
 ```
 
 ## Database diagram
-[imgur.com](https://imgur.com/WS862NS)
+![Image not found](img/db_scheme.png)
