@@ -6,3 +6,4 @@ requests~=2.31
 djangorestframework~=3.14
 drf-extra-fields~=3.7
 django-filter~=23.4
+flake8~=6.1.0

@@ -6,61 +6,138 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Brand',
+            name="Brand",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='CarModel',
+            name="CarModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256)),
-                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='car_models', to='marketplace.brand')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256)),
+                (
+                    "brand",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="car_models",
+                        to="marketplace.brand",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ParameterType',
+            name="ParameterType",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Parameter',
+            name="Parameter",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256)),
-                ('type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='parameters', to='marketplace.parametertype')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256)),
+                (
+                    "type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="parameters",
+                        to="marketplace.parametertype",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Generation',
+            name="Generation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=256)),
-                ('year', django.contrib.postgres.fields.ranges.DateRangeField()),
-                ('allowed_parameters', models.ManyToManyField(to='marketplace.parameter')),
-                ('car_model', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='generations', to='marketplace.carmodel')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=256)),
+                ("year", django.contrib.postgres.fields.ranges.DateRangeField()),
+                (
+                    "allowed_parameters",
+                    models.ManyToManyField(to="marketplace.parameter"),
+                ),
+                (
+                    "car_model",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="generations",
+                        to="marketplace.carmodel",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Advertisement',
+            name="Advertisement",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.CharField(max_length=512)),
-                ('price', models.FloatField(default=0)),
-                ('generation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='advertisements', to='marketplace.generation')),
-                ('parameters', models.ManyToManyField(to='marketplace.parameter')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.CharField(max_length=512)),
+                ("price", models.FloatField(default=0)),
+                (
+                    "generation",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="advertisements",
+                        to="marketplace.generation",
+                    ),
+                ),
+                ("parameters", models.ManyToManyField(to="marketplace.parameter")),
             ],
         ),
     ]

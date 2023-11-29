@@ -6,11 +6,11 @@ from users.api.urls import urlpatterns as users_urls
 
 
 api_urls = [
-    path('', include(marketplace_urls), name='marketplace'),
-    path('', include(users_urls), name='users')
+    path("", include(marketplace_urls), name="marketplace"),
+    path("", include(users_urls), name="users"),
 ]
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(api_urls), name='api'),
+    path("admin/", admin.site.urls),
+    path("api/", include(api_urls), name="api"),
 ]

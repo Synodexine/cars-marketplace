@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 
 
-SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS']
+SAFE_METHODS = ["GET", "HEAD", "OPTIONS"]
 
 
 class IsAdminOrReadOnly(BasePermission):
